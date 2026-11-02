@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101114" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23d4fc57'/%3E%3Cpath d='M13 18h38v10H27v8h22v10H13z' fill='%23101114'/%3E%3C/svg%3E" />
+  <title>GUNJUNK — Illegal Arms Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Gunjunk home"><span class="brand-mark">G<span>✳</span></span><span class="brand-name">GUN<span>JUNK</span></span></a>
+    <div class="top-note"><span class="live-dot"></span> UNLICENSED WEAPON RESEARCH <span class="top-divider">/</span> LAB 07</div>
+    <div class="credits"><span class="credit-icon">✦</span><span id="scrap-count">240</span><small>SCRAP</small></div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div class="intro-copy"><div class="eyebrow"><span>FIELD NOTES #007</span><span class="eyebrow-line"></span><span>NO REFUNDS</span></div>
+        <h1>MAKE A <i>MESS.</i></h1>
+        <p>Two guns go in. Something questionable comes out. <strong>Try not to lose a finger.</strong></p>
+      </div>
+      <div class="lab-stamp"><span>AUTHORIZED<br>PERSONNEL ONLY</span><b>✳</b><small>EST. WHENEVER</small></div>
+    </section>
+
+    <div class="game-layout">
+      <aside class="panel armory-panel">
+        <div class="panel-head"><div><div class="section-kicker">01 / THE BONEYARD</div><h2>YOUR GUNS <span id="gun-count">06</span></h2></div><button class="icon-btn" id="shuffle-btn" title="Restock starter guns" aria-label="Restock guns">↻</button></div>
+        <div class="armory-sub">PICK ANY TWO. COMPATIBILITY IS A SUGGESTION.</div>
+        <div class="weapon-list" id="weapon-list"></div>
+        <div class="boneyard-footer"><span class="tiny-square"></span> <span>NEW STOCK IS ALWAYS A LITTLE CURSED</span></div>
+      </aside>
+
+      <section class="panel forge-panel">
+        <div class="panel-head forge-head"><div><div class="section-kicker">02 / THE BAD IDEA MACHINE</div><h2>FUSION CHAMBER</h2></div><span class="machine-status"><span class="live-dot"></span> ONLINE</span></div>
+        <div class="chamber">
+          <div class="chamber-grid"></div><div class="chamber-corners"><i></i><i></i><i></i><i></i></div>
+          <div class="slot-row">
+            <button class="fusion-slot" id="slot-a" aria-label="First fusion slot"><span class="slot-label">INPUT A</span><span class="slot-plus">+</span><span class="slot-hint">SELECT A GUN</span></button>
+            <div class="plus-sign">+</div>
+            <button class="fusion-slot" id="slot-b" aria-label="Second fusion slot"><span class="slot-label">INPUT B</span><span class="slot-plus">+</span><span class="slot-hint">SELECT A GUN</span></button>
+          </div>
+          <div class="beam-line"><span></span><b>UNSTABLE MATTER</b><span></span></div>
+          <div class="output-slot" id="output-slot"><div class="output-placeholder"><span class="output-spark">✳</span><span>THE UNKNOWN</span><small>AWAITING QUESTIONABLE INPUTS</small></div></div>
+        </div>
+        <div class="forge-controls"><div class="cost-note"><span>⚠</span><span>FUSION MAY CAUSE<br><b>UNFORESEEN CONSEQUENCES</b></span></div><button class="combine-btn" id="combine-btn" disabled><span class="combine-icon">✳</span><span>COMBINE</span><span class="combine-cost">FREE*</span></button></div>
+        <div class="forge-footnote">* THE FIRST ONE IS FREE. THE REST ARE ALSO FREE. DON'T TELL THE ACCOUNTANT.</div>
+      </section>
+
+      <aside class="panel range-panel">
+        <div class="panel-head"><div><div class="section-kicker">03 / QUALITY CONTROL</div><h2>THE TEST PIT</h2></div><span class="range-tag">LIVE FIRE</span></div>
+        <div class="range-hint"><span>↖</span> CLICK / TAP TO SHOOT <span class="hint-key">SPACE</span></div>
+        <div class="range-screen" id="range-screen">
+          <canvas id="range-canvas" aria-label="Shooting range. Click to fire at moving targets"></canvas>
+          <div class="range-overlay" id="range-overlay"><div class="range-overlay-icon">◎</div><b>NO GUN EQUIPPED</b><small>FUSE OR SELECT A WEAPON<br>TO ENTER THE TEST PIT</small></div>
+          <div class="hit-flash" id="hit-flash"></div>
+          <div class="range-hud"><span><b id="ammo-value">— / —</b><small>AMMO</small></span><span><b id="score-value">000</b><small>SCRAP EARNED</small></span></div>
+        </div>
+        <div class="range-footer"><span id="range-weapon-label">SELECT A WEAPON TO BEGIN</span><button id="reload-btn" class="reload-btn" disabled><span>↻</span> RELOAD <kbd>R</kbd></button></div>
+        <div class="range-tip"><span class="tip-icon">✦</span><span><b>FIELD TIP:</b> Weird guns tend to hit harder. Weirdly.</span></div>
+      </aside>
+    </div>
+
+    <section class="collection panel">
+      <div class="collection-head"><div><div class="section-kicker">04 / YOUR QUESTIONABLE LEGACY</div><h2>THE COLLECTION <span id="collection-count">00</span></h2></div><div class="collection-meta">FUSED WEAPONS <span>·</span> <b id="best-rarity">NOTHING ILLEGAL (YET)</b></div></div>
+      <div class="collection-list" id="collection-list"><div class="empty-collection"><span>✳</span> NOTHING HERE BUT BAD DECISIONS. MAKE ONE.</div></div>
+    </section>
+    <footer><span>GUNJUNK INDUSTRIES™</span><span>DO NOT OPERATE WHILE THINKING ABOUT IT</span><span>V 0.7.3 / PROBABLY SAFE</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="modal-backdrop" hidden><div class="discovery-modal" role="dialog" aria-modal="true" aria-labelledby="discovery-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="modal-kicker">UNEXPECTED RESULT // HANDLE WITH TONGS</div><div class="modal-art" id="modal-art"></div><div class="modal-rarity" id="modal-rarity"></div><h2 id="discovery-title">A NEW ABOMINATION</h2><p id="modal-description"></p><div class="modal-stats" id="modal-stats"></div><button class="take-it-btn" id="take-it-btn">KEEP THIS THING <span>→</span></button></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
